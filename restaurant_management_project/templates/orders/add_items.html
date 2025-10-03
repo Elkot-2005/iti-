@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add Items to Order #{{ order.id }}</h2>
+<form method="post" class="card p-3">{% csrf_token %}{{ form.as_p }}
+  <button class="btn btn-success" type="submit">Add Item</button>
+  <a class="btn btn-secondary" href="{% url 'orders:order_detail' order.pk %}">Back to Order</a>
+</form>
+<h4 class="mt-4">Current Items</h4>
+<ul>
+  {% for it in order.items.all %}
+    <li>{{ it.quantity }} x {{ it.item.name }} - ${{ it.item.price }}</li>
+  {% empty %}
+    <li>No items yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

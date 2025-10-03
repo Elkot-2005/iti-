@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ form.instance.pk|yesno:'Edit Customer,Add Customer' }}</h2>
+<form method="post" class="card p-3">{% csrf_token %}{{ form.as_p }}
+  <button class="btn btn-success" type="submit">Save</button>
+  <a class="btn btn-secondary" href="{% url 'customers:customer_list' %}">Cancel</a>
+</form>{% endblock %}
